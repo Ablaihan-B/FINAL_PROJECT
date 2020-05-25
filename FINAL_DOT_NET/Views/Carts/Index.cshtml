@@ -1,0 +1,177 @@
+﻿@model IEnumerable<FINAL_DOT_NET.Models.Goods.Good>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<style>
+    .quantity {
+        float: left;
+        margin-right: 15px;
+        background-color: #eee;
+        position: relative;
+        width: 80px;
+        overflow: hidden
+    }
+
+        .quantity input {
+            margin: 0;
+            text-align: center;
+            width: 15px;
+            height: 15px;
+            padding: 0;
+            float: right;
+            color: #000;
+            font-size: 20px;
+            border: 0;
+            outline: 0;
+            background-color: #F6F6F6
+        }
+
+            .quantity input.qty {
+                position: relative;
+                border: 0;
+                width: 100%;
+                height: 40px;
+                padding: 10px 25px 10px 10px;
+                text-align: center;
+                font-weight: 400;
+                font-size: 15px;
+                border-radius: 0;
+                background-clip: padding-box
+            }
+
+        .quantity .minus, .quantity .plus {
+            line-height: 0;
+            background-clip: padding-box;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            -webkit-background-size: 6px 30px;
+            -moz-background-size: 6px 30px;
+            color: #bbb;
+            font-size: 20px;
+            position: absolute;
+            height: 50%;
+            border: 0;
+            right: 0;
+            padding: 0;
+            width: 25px;
+            z-index: 3
+        }
+
+            .quantity .minus:hover, .quantity .plus:hover {
+                background-color: #dad8da
+            }
+
+        .quantity .minus {
+            bottom: 0
+        }
+
+    .shopping-cart {
+        margin-top: 20px;
+    }
+</style>
+
+
+
+
+
+
+
+<div class="container">
+    <div>
+        @foreach (var item in Model)
+        {
+
+                <div class="card shopping-cart">
+
+                    <div class="card-body">
+                        <!-- PRODUCT -->
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-2 text-center">
+                                <!-- <img class="img-responsive" th:src="{'images/' +${}}" alt="prewiew" width="120" height="140">-->
+                            </div>
+                           <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+
+                                    <h4 class="product-name"><strong>
+                                        @Html.DisplayFor(modelItem => item)
+                                      
+                                    </strong></h4>
+                                         <h4>
+                                        
+                                        <small> @Html.DisplayFor(modelItem => item.Description)</small>
+                                    </h4>
+                                </div>
+                                <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                                    <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                        <h6><strong> US $ @Html.DisplayFor(modelItem => item.Price)</strong></h6>
+                                    </div>
+
+                                    <div class="col-2 col-sm-2 col-md-2 text-right">
+
+                                        <a asp-action="Delete" asp-route-id="item.Id">
+                                            <button type="button" class="btn btn-outline-danger btn-xs">
+                                                <img src="~/images/trash.png" alt="image" style="width: 15px" />
+                                            </button>
+                                        </a>
+
+                                        <a asp-action="Details" asp-route-id="item.Id">
+                                            <button type="button" class="btn btn-outline-primary btn-xs" style="margin-top:5px">
+                                                <img src="~/images/great.png" alt="image" style="width: 15px" />
+                                            </button>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+
+
+
+
+
+
+<!--
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    Html.DisplayFor(modelItem => item.Good.Name)
+                </td>
+                <td>
+                    Html.DisplayFor(modelItem => item.Good.Description)
+                </td>
+                <td>
+                    Html.DisplayFor(modelItem => item.Good.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    -->

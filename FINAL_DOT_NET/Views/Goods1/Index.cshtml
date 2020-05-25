@@ -1,0 +1,171 @@
+﻿@model IEnumerable<FINAL_DOT_NET.Models.Goods.Good>
+<!--model IEnumerable<FINAL_DOT_NET.ViewModels.GoodsViewModel>-->
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+
+    <h1 style="text-align:center">Goods</h1>
+    <p style="text-align:center">
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<style>
+
+    .card-product:after {
+        content: "";
+        display: table;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .card-product .price-new, .card-product .price {
+        margin-right: 5px;
+    }
+
+    .card-product .price-old {
+        color: #999;
+    }
+
+    .card-product .img-wrap {
+        border-radius: 3px 3px 0 0;
+        overflow: hidden;
+        position: relative;
+        height: 220px;
+        text-align: center;
+    }
+
+        .card-product .img-wrap img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+    .card-product .info-wrap {
+        overflow: hidden;
+        padding: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .card-product .action-wrap {
+        padding-top: 4px;
+        margin-top: 4px;
+    }
+
+    .card-product .bottom-wrap {
+        padding: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .card-product .title {
+        margin-top: 0;
+    }
+</style>
+
+
+
+<div class="container" style="margin-left: 100px;margin-top: 50px;margin-bottom: 100px">
+
+    <div class="row">
+
+
+
+        @foreach (var item in Model)
+        {
+            <a asp-action="Details" asp-route-id="item.Id" style="cursor: pointer;">
+                <div>
+                    <figure class="card card-product" style="width: 220px;margin-left: 30px">
+                        <div class="img-wrap">
+                            <img class="product__image" src="~/images/@item.Image" />
+
+                       
+                        </div>
+
+
+                        <figcaption class="info-wrap">
+                            <h6 class="title text-dots">
+                                <a asp-action="Details" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </a>
+
+                            </h6>
+                            <h7>
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                }
+                            </h7>
+
+                            <div class="action-wrap">
+                                <a asp-controller="Carts" asp-action="Create" asp-route-GoodId="@item.Id" class="btn btn-primary btn-sm float-right">Add to cart</a>
+
+
+
+                                <div class="price-wrap h5">
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </div> <!-- price-wrap.// -->
+                            </div> <!-- action-wrap -->
+                        </figcaption>
+                    </figure> <!-- card // -->
+
+                </div>
+            </a>
+        }
+
+
+
+    </div>
+
+</div>
+
+
+<!--
+     <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                       Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                           Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Edit" asp-route-id="item.Id">Edit |</a>
+                                <a asp-action="Delete" asp-route-id="item.Id">Delete</a>
+                            }
+                            <a asp-action="Details" asp-route-id="item.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+-->

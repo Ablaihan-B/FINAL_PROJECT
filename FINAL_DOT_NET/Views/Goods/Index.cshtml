@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FINAL_DOT_NET.Models.Goods.Good>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Goods</h1><br>
+
+<a asp-action="Add">Create</a>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Category</td>
+            <td>Description</td>
+            <td>Price</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var g in Model)
+        {
+        <tr>
+            <td>@g.Id</td>
+            <td>@g.Name</td>
+            <td>@g.Category.</td>
+            <td>@g.Description</td>
+            <td>@g.Price</td>
+
+
+
+            <td>
+                <form method="post" asp-action="Read" asp-route-id="@g.Id">
+                    <button type="submit" class="btn btn-dark">Read</button>
+                </form>
+            </td>
+
+            <td>
+                <a asp-action="Update" class="btn btn-primary" asp-route-id="@g.Id">Edit</a>
+            </td>
+
+            <td>
+                <form method="post" asp-action="Delete" asp-route-id="@g.Id">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+
+
+        </tr>
+        }
+    </tbody>
+</table>
